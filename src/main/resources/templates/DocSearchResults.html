@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DocSearch Results</title>
+    <link rel="stylesheet" href="/css/bulma.css">
+</head>
+<body>
+<section class="section">
+    <h1 class="title">DocSearch Results</h1>
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Query</th>
+                <th>Hit?</th>
+            </tr>
+            </thead>
+            <tbody>
+            {#each resultsMap}
+                <tr>
+                <td>{it.key}</td>
+                <td>{it.value}</td>
+                </tr>
+            {/each}
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>
