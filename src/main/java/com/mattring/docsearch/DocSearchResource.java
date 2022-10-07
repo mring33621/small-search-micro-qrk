@@ -1,4 +1,4 @@
-package com.mattring;
+package com.mattring.docsearch;
 
 import com.mattring.smallsearch.Search;
 import io.quarkus.qute.Location;
@@ -30,11 +30,12 @@ public class DocSearchResource {
     public TemplateInstance find(@MultipartForm DocSearchFormData docSearchFormData) {
         List<Object> queryList = Arrays.asList(docSearchFormData.queries.split("\\R"));
         List<Object> results = Search.find(queryList, docSearchFormData.docText);
-        Map<String, Integer> resultsMap = new LinkedHashMap<>(queryList.size());
+        DocSearchResultsData resultsData =
+                new DocSearchResultsData(Boolean.valueOf(docSearchFormData.returnBodyOnly), results.size());
         int i = 0;
         for (Object result : results) {
-            resultsMap.put(queryList.get(i++).toString(), Integer.valueOf(result.toString()));
+            resultsData.queryHits.put(queryList.get(i++).toString(), Integer.valueOf(result.toString()));
         }
-        return resultsTemplate.data("resultsMap", resultsMap);
+        return resultsTemplate.data("resultsData", resultsData);
     }
 }

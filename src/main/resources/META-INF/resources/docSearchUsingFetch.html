@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DocSearch</title>
+    <link rel="stylesheet" href="/css/bulma.css">
+    <script>
+        function send(e, form, successResponseCallback) {
+            fetch(form.action, {method: 'post', body: new FormData(form)})
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json()
+                            .catch(() => {
+                                // Couldn't parse the JSON
+                                throw new Error(response.status);
+                            })
+                            .then(({message}) => {
+                                // Got valid JSON with error response, use it
+                                throw new Error(message || response.status);
+                            });
+                    }
+                    // Successful response, handle the response data
+                    successResponseCallback(response);
+                });
+            e.preventDefault();
+        }
+
+        function logResponse(response) {
+            console.log(response.text());
+        }
+
+        function appendSearchResults(response) {
+            response.text().then(resultsHtml => {
+                document.getElementById('search-results').insertAdjacentHTML('beforeend', resultsHtml);
+            });
+        }
+    </script>
+</head>
+<body>
+<section class="section">
+    <h1 class="title">DocSearch</h1>
+    <div class="container">
+        <form id="DocSearchForm" action="/docSearch.action" method="post"
+              onsubmit="send(event, this, appendSearchResults)">
+            <div class="field">
+                <label class="label">Document Text</label>
+                <div class="control">
+                    <textarea name="docText" class="textarea" placeholder="Lorem ipsum"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Search Queries (one per line)</label>
+                <div class="control">
+                    <textarea name="queries" class="textarea" placeholder="Apple AND NOT pie"></textarea>
+                </div>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <input type="reset" class="button" value="Clear">
+                </div>
+            </div>
+            <input type="hidden" name="returnBodyOnly" value="true">
+        </form>
+    </div>
+</section>
+<div id="search-results"></div>
+</body>
+</html>

@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DocSearch</title>
-    <link rel="stylesheet" href="/css/bulma.css">
+    <link rel="stylesheet" href="/css/bulma.css" />
+    <script type="text/javascript" src="/js/htmx.min.js"></script>
 </head>
 <body>
 <section class="section">
     <h1 class="title">DocSearch</h1>
     <div class="container">
-        <form id="DocSearchForm" action="/docSearch.action" method="post" enctype="multipart/form-data">
+        <form id="DocSearchForm" hx-encoding='multipart/form-data' hx-post='/docSearch.action' hx-swap="innerHTML" hx-target="#search-results">
             <div class="field">
                 <label class="label">Document Text</label>
                 <div class="control">
@@ -31,10 +32,10 @@
                     <input type="reset" class="button" value="Clear">
                 </div>
             </div>
-            <input type="hidden" name="returnBodyOnly" value="false">
+            <input type="hidden" name="returnBodyOnly" value="true">
         </form>
     </div>
 </section>
-
+<div id="search-results"></div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.mattring;
+package com.mattring.docsearch;
 
 import org.jboss.resteasy.annotations.providers.multipart.PartType;
 
@@ -12,4 +12,8 @@ public class DocSearchFormData {
     @FormParam("queries")
     @PartType(MediaType.TEXT_PLAIN)
     public String queries;
+
+    @FormParam("returnBodyOnly")
+    @PartType(MediaType.TEXT_PLAIN)
+    public String returnBodyOnly;
 }
