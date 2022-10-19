@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DocSearch</title>
-    <link rel="stylesheet" href="/css/bulma.css" />
-    <script type="text/javascript" src="/js/htmx.min.js"></script>
+    <link rel="stylesheet" href="/css/bulma.css"/>
 </head>
 <body>
 <section class="section">
     <h1 class="title">DocSearch</h1>
     <div class="container">
-        <form id="DocSearchForm" hx-encoding='multipart/form-data' hx-post='/docSearch.action' hx-swap="innerHTML" hx-target="#search-results">
+        <form id="DocSearchForm" action="/docSearch.turbo" method="post" enctype="multipart/form-data">
             <div class="field">
                 <label class="label">Document Text</label>
                 <div class="control">
@@ -33,10 +32,13 @@
                 </div>
             </div>
             <input type="hidden" name="returnBodyOnly" value="true">
-            <input type="hidden" name="turboTag" value="false">
+            <input type="hidden" name="turboTag" value="true">
         </form>
     </div>
 </section>
 <div id="search-results"></div>
+<script type="module">
+    import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+</script>
 </body>
 </html>

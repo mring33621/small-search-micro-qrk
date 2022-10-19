@@ -1,5 +1,5 @@
 {#if !resultsData.returnBodyOnly}
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -9,27 +9,35 @@
 </head>
 <body>
 {/if}
-<section class="section">
-    <h1 class="title">DocSearch Results</h1>
-    <div class="container">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Query</th>
-                <th>Hit?</th>
-            </tr>
-            </thead>
-            <tbody>
-            {#each resultsData.queryHits}
+{#if resultsData.turboTag}
+<turbo-stream action="replace" target="search-results">
+    <template>
+{/if}
+    <section class="section">
+        <h1 class="title">DocSearch Results</h1>
+        <div class="container">
+            <table class="table">
+                <thead>
                 <tr>
-                <td>{it.key}</td>
-                <td>{it.value}</td>
+                    <th>Query</th>
+                    <th>Hit?</th>
                 </tr>
-            {/each}
-            </tbody>
-        </table>
-    </div>
-</section>
+                </thead>
+                <tbody>
+                {#each resultsData.queryHits}
+                    <tr>
+                    <td>{it.key}</td>
+                    <td>{it.value}</td>
+                    </tr>
+                {/each}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{#if resultsData.turboTag}
+    </template>
+</turbo-stream>
+{/if}
 {#if !resultsData.returnBodyOnly}
 </body>
 </html>

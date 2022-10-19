@@ -16,4 +16,8 @@ public class DocSearchFormData {
     @FormParam("returnBodyOnly")
     @PartType(MediaType.TEXT_PLAIN)
     public String returnBodyOnly;
+
+    @FormParam("turboTag")
+    @PartType(MediaType.TEXT_PLAIN)
+    public String turboTag;
 }

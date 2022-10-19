@@ -1,10 +1,18 @@
 # small-search-micro-qrk Project
 
 ---
-A mini Quarkus App that uses small-search.
-Intent is to:
+A mini Quarkus App that uses [small-search](https://github.com/mring33621/small-search).
+
+My intent is to:
 - learn about quarkus
-- play with various web things 
+- play with various web things
+
+What I have done so far:
+1) traditional form submission with page load
+2) form submission with JS fetch to append results to same page
+3) form submission with htmx to present results on same page
+4) form submission with Hotwire Turbo to present results on same page (currently broken)
+
 ---
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
